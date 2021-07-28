@@ -12,8 +12,11 @@ To create the tables:
 `python3 create_tables.py `
 
 *insert_data.py:* Insertion queries 
+
 *select_data.py:* Selection queries
 
 To Test selection and insertion:
+
 `python3 insertion_tests.py`
+
 `python3 selection_tests.py`
