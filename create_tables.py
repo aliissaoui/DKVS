@@ -25,12 +25,23 @@ Transaction_query = """CREATE TABLE IF NOT EXISTS transactions(
                     time TIMESTAMP,
                     message_version TEXT,
                     );"""
+                    
+
+Pending_ransaction_query = """CREATE TABLE IF NOT EXISTS pending_transactions( 
+                    transaction_id INT PRIMARY KEY,
+                    time TIMESTAMP,
+                    status TEXT,
+                    transaction_object BLOB,
+                    );"""
 
 print("Creating block table...")
 session.execute(Block_query)
 
 print("Creating transaction table...")
 session.execute(Transaction_query)
+
+print("Creating pending transaction table...")
+session.execute(Pending_ransaction_query)
 
 ###### "Relations tables"
 Block_transaction_query = """CREATE TABLE IF NOT EXISTS transactions_by_block( 
