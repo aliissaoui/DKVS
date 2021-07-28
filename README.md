@@ -10,9 +10,9 @@ To create the tables:
 `python3 create_tables.py `
 
 ### Queries
-*insert_data.py:* Insertion queries 
+**insert_data.py:** Insertion queries 
 
-*select_data.py:* Selection queries
+**select_data.py:** Selection queries
 
 To Test selection and insertion:
 
