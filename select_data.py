@@ -1,7 +1,7 @@
 from cassandra.cluster import Cluster
 from cassandra.query import SimpleStatement
 from cassandra import ConsistencyLevel
-import time
+from datetime import datetime, timedelta
 
 KEYSPACE = "blockchaine"
 
@@ -25,13 +25,18 @@ def select_block_transaction():
     res = session.execute(query)
     return res
 
-# INCOMPLETE
-"""def select_10min():
-    condition = timestamp < current_timestamp - 10 min # ?
-    query = "SELECT * FROM pending_transaction WHERE condition;"
-    res = session.execute(query)
-    return res"""
+# For Nupur
+def select_by_time(delta):
 
+    current_timestamp = datetime.now()
+    time_condition = current_timestamp - timedelta(minutes=delta)
+
+    # Pending transactions*
+    query = SimpleStatement("SELECT * FROM transactions WHERE time < %(s)s ALLOW FILTERING;", consistency_level=ConsistencyLevel.ONE)
+    res = session.execute(query, dict(s=time_condition))
+    return res
+
+# For prad
 def select_by_timestamp(starting_from, block_count):
     query = SimpleStatement(""" SELECT * FROM blocks
                                 WHERE time >= %(s)s

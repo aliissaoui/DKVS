@@ -5,7 +5,7 @@ from cassandra import ConsistencyLevel
 from datetime import datetime, timedelta
 import time;
 
-from select_data import select_by_timestamp
+from select_data import select_by_timestamp, select_by_time
 
 KEYSPACE = "blockchaine"
 
@@ -25,7 +25,9 @@ def test_timestamp():
         print(e)
 
 def main():
-    test_timestamp()
+    res = select_by_time(10)
+    for e in res:
+        print(e)
 
 if __name__ == "__main__":
     main()
