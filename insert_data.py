@@ -40,7 +40,7 @@ def transaction_insert(transaction_id, block_id, source_wallet, destination_wall
                         t=time,
                         m=message_version))
 
-def Pending_transaction_insert(transaction_id, time, status, transaction_object):
+def pending_transaction_insert(transaction_id, time, status, transaction_object):
 
     ## Insert in relation tables too
     Pending_transaction_query = SimpleStatement("""INSERT INTO pending_transactions (transaction_id, time, status, transaction_object)
