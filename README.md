@@ -14,7 +14,7 @@ To create the tables:
 
 **select_data.py:** Selection queries
 
-To Test selection and insertion:
+### To Test selection and insertion:
 
 `python3 insertion_tests.py`
 `python3 selection_tests.py`
