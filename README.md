@@ -2,11 +2,13 @@
 
 *Cassandra installation required*
 
-** Local tests: ** 
+**Local tests:** 
 To create a keyspace called 'blockchain': 
+
 `python3 create_keyspace.py `
 
 To create the tables: 
+
 `python3 create_tables.py `
 
 *insert_data.py:* Insertion queries 
