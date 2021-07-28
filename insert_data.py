@@ -29,7 +29,7 @@ def transaction_insert(transaction_id, block_id, source_wallet, destination_wall
     ## Insert in relation tables too
     query_transaction_insert = SimpleStatement("""INSERT INTO transactions (transaction_id, block_id, source_wallet, destination_wallet, num_coins, time, message_version)
                             VALUES (%(id)s, %(b_id)s, %(sw)s, %(dw)s, %(n)s, %(t)s, %(m)s)
-                            IF NOT EXISTS;""", consistency_level=ConsistencyLevel.ONE)    ## Insert in relation tables
+                            IF NOT EXISTS;""", consistency_level=ConsistencyLevel.ONE) ## Insert in relation tables
 
     session.execute(query_transaction_insert, 
                     dict(id=transaction_id,
@@ -41,6 +41,8 @@ def transaction_insert(transaction_id, block_id, source_wallet, destination_wall
                         m=message_version))
 
 def Pending_transaction_insert(transaction_id, time, status, transaction_object):
+
+    ## Insert in relation tables too
     Pending_transaction_query = SimpleStatement("""INSERT INTO pending_transactions (transaction_id, time, status, transaction_object)
                                                 VALUES (%(id)s, %(t)s, %(s)s, %(to)s)
                                                 IF NOT EXISTS;""", consistency_level=ConsistencyLevel.ONE)
