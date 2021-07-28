@@ -27,7 +27,7 @@ Transaction_query = """CREATE TABLE IF NOT EXISTS transactions(
                     );"""
                     
 
-Pending_ransaction_query = """CREATE TABLE IF NOT EXISTS pending_transactions( 
+Pending_transaction_query = """CREATE TABLE IF NOT EXISTS pending_transactions( 
                     transaction_id INT PRIMARY KEY,
                     time TIMESTAMP,
                     status TEXT,
@@ -52,4 +52,4 @@ Block_transaction_query = """CREATE TABLE IF NOT EXISTS transactions_by_block(
                             );"""
 
 print("Creating transactions by block table...")
-session.execute(Transaction_query)
+session.execute(Block_transaction_query)

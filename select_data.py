@@ -1,4 +1,7 @@
 from cassandra.cluster import Cluster
+from cassandra.query import SimpleStatement
+from cassandra import ConsistencyLevel
+import time
 
 KEYSPACE = "blockchaine"
 
@@ -23,17 +26,17 @@ def select_block_transaction():
     return res
 
 # INCOMPLETE
-def select_10min():
+"""def select_10min():
     condition = timestamp < current_timestamp - 10 min # ?
     query = "SELECT * FROM pending_transaction WHERE condition;"
     res = session.execute(query)
+    return res"""
+
+def select_by_timestamp(starting_from, block_count):
+    query = SimpleStatement(""" SELECT * FROM blocks
+                                WHERE time >= %(s)s
+                                LIMIT %(b)s
+                                ALLOW FILTERING """, consistency_level=ConsistencyLevel.ONE)
+    res = session.execute(query, dict(s=starting_from, b=block_count))
     return res
 
-def select_prad(starting_from, block_count):
-    query = "SELECT * FROM blocks WHERE time >= "+starting_from+" ORDER BY time LIMIT "+block_count+";"
-    res = session.execute(query)
-    return res
-
-block_columns = select_blocks()
-for col in block_columns:
-    print(col)
