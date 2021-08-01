@@ -15,7 +15,6 @@ session = cluster.connect(KEYSPACE)
 
 def block_insert(block_id, previous_block_id, time, hash_of_block):
     
-    ## Insert in relation tables too
     query_block_insert = SimpleStatement("""INSERT INTO blocks (block_id, previous_block_id, time, hash_of_block)
                                 VALUES  (%(id)s, %(old_id)s, %(t)s, %(h)s)
                                 IF NOT EXISTS;
@@ -26,7 +25,6 @@ def block_insert(block_id, previous_block_id, time, hash_of_block):
 
 def transaction_insert(transaction_id, block_id, source_wallet, destination_wallet, num_coins, time, message_version):
     
-    ## Insert in relation tables too
     query_transaction_insert = SimpleStatement("""INSERT INTO transactions (transaction_id, block_id, source_wallet, destination_wallet, num_coins, time, message_version)
                             VALUES (%(id)s, %(b_id)s, %(sw)s, %(dw)s, %(n)s, %(t)s, %(m)s)
                             IF NOT EXISTS;""", consistency_level=ConsistencyLevel.ONE) ## Insert in relation tables
@@ -42,7 +40,6 @@ def transaction_insert(transaction_id, block_id, source_wallet, destination_wall
 
 def pending_transaction_insert(transaction_id, time, status, transaction_object):
 
-    ## Insert in relation tables too
     Pending_transaction_query = SimpleStatement("""INSERT INTO pending_transactions (transaction_id, time, status, transaction_object)
                                                 VALUES (%(id)s, %(t)s, %(s)s, %(to)s)
                                                 IF NOT EXISTS;""", consistency_level=ConsistencyLevel.ONE)

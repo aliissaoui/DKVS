@@ -9,7 +9,6 @@ print("Connecting to cluster...")
 
 session = cluster.connect()
 
-
 print("Creating keyspace...")
 
 session.execute("""

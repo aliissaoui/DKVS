@@ -28,17 +28,16 @@ def select_block_transaction():
 # For Nupur
 def select_by_time(delta):
 
-    current_timestamp = datetime.now()
-    time_condition = current_timestamp - timedelta(minutes=delta)
-
-    # Pending transactions*
-    query = SimpleStatement("SELECT * FROM transactions WHERE time < %(s)s ALLOW FILTERING;", consistency_level=ConsistencyLevel.ONE)
+    time_condition = datetime.now() - timedelta(minutes=delta)
+    query = SimpleStatement("SELECT * FROM transactions WHERE time < %(s)s ALLOW FILTERING;",
+                             consistency_level=ConsistencyLevel.ONE)
     res = session.execute(query, dict(s=time_condition))
+
     return res
 
 # For prad
 def select_by_timestamp(starting_from, block_count):
-    query = SimpleStatement(""" SELECT * FROM blocks
+    query = SimpleStatement("""SELECT * FROM blocks
                                 WHERE time >= %(s)s
                                 LIMIT %(b)s
                                 ALLOW FILTERING """, consistency_level=ConsistencyLevel.ONE)
